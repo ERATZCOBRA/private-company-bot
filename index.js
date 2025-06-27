@@ -1,9 +1,22 @@
 require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
+const express = require('express');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 
-// Create a new client instance
+// ─── Express Web Server (for keeping bot alive on Render) ───────────────
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bot is running!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Web server is running on port ${PORT}`);
+});
+
+// ─── Discord Bot Client Setup ───────────────────────────────────────────
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -12,10 +25,10 @@ const client = new Client({
   ],
 });
 
-// Command collection
+// Initialize command collection
 client.commands = new Collection();
 
-// Load slash commands
+// ─── Load Slash Commands ────────────────────────────────────────────────
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -29,7 +42,7 @@ for (const file of commandFiles) {
   }
 }
 
-// Load events
+// ─── Load Event Handlers ────────────────────────────────────────────────
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -43,5 +56,5 @@ for (const file of eventFiles) {
   }
 }
 
-// Start the bot
+// ─── Login the Bot ──────────────────────────────────────────────────────
 client.login(process.env.TOKEN);
