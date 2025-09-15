@@ -56,7 +56,7 @@ module.exports = {
         `**Feedback:** ${feedback}\n\n` +
         `**Signed,**\n${requester}`
       )
-      .setColor(0x0000ff)
+      .setColor(0x95a5a6)
       .setFooter({
         text: `Rated by ${requester.username} | On ${time}`,
         iconURL: requester.displayAvatarURL({ dynamic: true }),
