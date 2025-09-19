@@ -29,7 +29,7 @@ const REVIEWER_ROLE_IDS = process.env.TRAINING_REVIEWER_ROLE_IDS
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('request-training')
-    .setDescription('Submit a formal FBI training request')
+    .setDescription('Submit a formal training request')
     .setDefaultMemberPermissions(null)
     .setDMPermission(false)
     .addStringOption(option =>
