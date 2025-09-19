@@ -20,7 +20,7 @@ const REVIEWER_ROLE_IDS = process.env.RIDEALONG_REVIEWER_ROLE_IDS?.split(',') ||
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('ridealong-request')
-    .setDescription('Submit a formal FBI ride-along request')
+    .setDescription('Submit a formal ride-along request')
     .setDefaultMemberPermissions(null)
     .setDMPermission(false)
     .addStringOption(option =>
